@@ -1,6 +1,6 @@
 # Hexo Configuration
-## Docs: https://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
+## Docs: 'https://hexo.io/docs/configuration.html'
+## Source: 'https://github.com/hexojs/hexo/'
 
 # Site
 title: Hexo
@@ -80,7 +80,7 @@ meta_generator: true
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
-time_format: HH:mm:ss
+time_format: 'HH:mm:ss'
 ## updated_option supports 'mtime', 'date', 'empty'
 updated_option: 'mtime'
 
