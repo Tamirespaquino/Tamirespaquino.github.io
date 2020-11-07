@@ -1,0 +1,118 @@
+Este tutorial se inicia após a criação de um novo repositório no Github com o padrão
+'username.github.io.
+
+1- Configurar Travis CI 
+
+Configuramos o Travis para rodar o Build do projeto. 
+Aqui, usaremos o Hexo, feito com Node. 
+
+*Cadastre-se no site do Travis CI, configurando-o
+com sua conta do Github;
+*Clique em 'Add new repository' e localize o repositório e ative no Travis;
+
+2 - Ativar Travis no Github Pages
+
+*Clique em 'Configurações' e desabilite  opção 'Build pull requests'
+a fim de que seu Blog não seja atualizado se alguém fizer um pull request;
+*Habilite o 'Build only if .travis.yml is present' para que a branch com 
+travis.yml seja a única a gerar atualizações;
+*Gerar um Token via GitHub. Salve o número gerado;
+*Na tela de configurações do repositório no Travis, configure a opção
+'Environment Variables' da seguinte forma:
+    name: DEPLOY_REPO (viriável de ambiente no sistema operacional. Garante a segurança do repositório)
+    value: https://o Token do github@github.com/usuário no github/repositorio do blog.git 
+
+3 - Configurar o travis para o Blog
+
+*Instale o Hexo com o seguinte comando:
+npm install hexo -g
+É necessário ter Git e Node.js instalados
+
+*Inicialize o Hexo com o comando:
+hexo init username.github.io
+
+*Acesse o repositório e faça o build com:
+npm install
+
+*Configure o .travis.yml com as seguintes configurações:
+
+language: node_js
+#Adicione o branch onde está a instalação do Hexo branches:
+branches:
+    only:
+    - BRANCH (ex.: master)
+
+before_install:
+- npm install hexo -g
+
+install:
+- npm install
+
+#Configure seu nome de usuário e e-mail
+before_script:
+- git config --global user.name 'Seu nome de usuario'
+- git config --global user.email 'Seu e-mail'
+
+script:
+- hexo generate
+
+#Configure a branch a ser feito o deploy 
+after_success:
+- mkidr .deploy
+- ce .deploy
+- git clone --depth 1 --branch BRANCH (ex. master) --single-branch $DEPLOY_REPO . || (git init && git remote dd -t BRANCH (ex master) origin $DEPLOY_REPO)
+- rm -rf ./*
+- cp -r ../public/*
+- git add -A .
+- git commit -m 'Site updated'
+- git branch -m BRANCH (ex master)
+- git push -q -u origin BRANCH (ex master)
+
+==> VERIFICAR *Usar um arquivo .nvmrc com a versão do Node em que está rodando o Hexo. 
+Assim, o Travis vai reconhecer automaticamente e vai setar a versão escolhida 
+na hora do build. Desta forma, consegue-se prevenir atualizações do Node no 
+servidor do Travis que quebre o build.
+
+*Configure o Hexo para fazer o deploy com seu usuário via Token com a seguinte linha no arquivo
+_config.yml do blog
+deploy:
+    type: git
+    repo: git@github.com:USUARIO/REPOSITORIO.git
+    branch: BRANCH (ex master)
+
+*Executar:
+hexo init site.github.io
+
+4 - Subindo para o Github
+
+*Salve os arquivos .travis.yml, _config.yml e packages.json
+
+*Suba para o GitHub usando o Git Bash, git add . e git commit -mail
+
+5 - Criando o primeiro post
+
+*Para criar seu primeiro post, utilize:
+hexo new [layout] <title>, sendo que [layout] será o landscape padrão do Hexo e o título do post
+
+6 - Gerando arquivos estáticos, execute:
+hexo generate
+
+7 - Após criar o primeiro post, execute
+hexo server 
+para testar e acesse a url
+localhost:4000
+
+8 - Faça o deploy com
+hexo deploy
+e acesse o site com a url
+https://username.github.io
+
+
+Bibliografia:
+https://woliveiras.com.br/posts/postando-no-blog-estático-direto-pelo-github-com-hexo-e-travis-ci/
+https://github.com/acfreitas/acfreitas/blob/master/source/_posts/Criando-um-blog-com-GitHub-Pages-e-Hexo-em-menos-de-10-passos.md
+
+
+
+
+
