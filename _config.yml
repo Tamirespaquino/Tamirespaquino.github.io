@@ -1,4 +1,4 @@
 deploy:
   type: git
-  repo: git@github.com: Tamirespaquino/tamirespaquino.git
+  repo: git@github.com: Tamirespaquino/tamirespaquino.github.io
   branch: MASTER
