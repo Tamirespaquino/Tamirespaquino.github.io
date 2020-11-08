@@ -1,4 +1,0 @@
-deploy:
-  type: git
-  repo: 'git@github.com:Tamirespaquino/tamirespaquino.git'
-  branch: MASTER
