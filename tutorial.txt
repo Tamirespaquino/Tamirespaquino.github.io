@@ -111,7 +111,7 @@ https://username.github.io
 Bibliografia:
 https://woliveiras.com.br/posts/postando-no-blog-estático-direto-pelo-github-com-hexo-e-travis-ci/
 https://github.com/acfreitas/acfreitas/blob/master/source/_posts/Criando-um-blog-com-GitHub-Pages-e-Hexo-em-menos-de-10-passos.md
-
+https://medium.com/trainingcenter/subindo-seu-projeto-front-github-pages-1b61e2e1c447
 
 
 
